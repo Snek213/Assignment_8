@@ -1,0 +1,27 @@
+@Assignment_8_HostAddress = http://localhost:5191
+
+# GET {{Assignment_8_HostAddress}}/weatherforecast/
+# Accept: application/json
+
+GET {{Assignment_8_HostAddress}}/EndPointHelper/
+Accept: application/json
+
+###
+
+
+GET {{Assignment_8_HostAddress}}/api/movies
+Accept: application/json
+
+###
+
+
+GET {{Assignment_8_HostAddress}}/api/movies/1
+Accept: application/json
+
+###
+
+
+GET {{Assignment_8_HostAddress}}/api/movies/999
+Accept: application/json
+
+###

@@ -1,0 +1,14 @@
+@Assignment_8_HostAddress = http://localhost:5191
+
+GET {{Assignment_8_HostAddress}}/
+Accept: application/json
+
+###
+
+
+GET {{Assignment_8_HostAddress}}/movies/1
+Accept: application/json
+
+###
+
+
