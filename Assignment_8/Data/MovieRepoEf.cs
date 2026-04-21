@@ -1,4 +1,5 @@
 ﻿using Assignment_8.Data;
+using Assignment_8.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 
@@ -31,7 +32,11 @@ namespace Assignment_8.Data
         public async Task DeleteByIdAsync(int id)
         {
             var movie = await _context.Movie.FirstOrDefaultAsync(m => m.Id == id);
-
+            if (movie != null)
+            {
+                _context.Movie.Remove(movie);
+                await _context.SaveChangesAsync();
+            }
         }
 
         public void SaveChanges()
@@ -57,6 +62,9 @@ namespace Assignment_8.Data
             await _context.SaveChangesAsync();
 		}
 
-
-	}
+        public void Update(Assignment_8.Models.Movie movie)
+        {
+            _context.Movie.Update(movie);
+        }
+    }
 }

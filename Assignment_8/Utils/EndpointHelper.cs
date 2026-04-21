@@ -10,7 +10,13 @@ namespace Assignment_8.Utils
             app.MapGet("/", GetAllMoviesAsync).WithName("GetAllMoviesAsync");
             app.MapGet("/movies/{id}", GetMovieByIdAsync).WithName("GetMovieById");
 
-            
+            app.MapPost("/movies", AddMovieAsync).WithName("AddMovie");
+
+            app.MapDelete("/movies/{id}", DeleteMovieAsync).WithName("DeleteMovie");
+
+            app.MapPut("/movies/{id}", UpdateMovieAsync).WithName("UpdateMovie");
+
+
         }
 
         public static async Task<IEnumerable<Movie>> GetAllMoviesAsync(IMovieRepo repo)
@@ -49,12 +55,29 @@ namespace Assignment_8.Utils
             await repo.DeleteByIdAsync(id);
         }
 
-        public static async Task UpdateMovieAsync(IMovieRepo repo, Movie movie)
+        public static async Task<IResult> UpdateMovieAsync(IMovieRepo repo, Movie movie)
         {
-            repo.Attach(movie);
-            await repo.SaveChangesAsync();
+            try
+            {
+                Movie? existingMovie = repo.GetById(movie.Id);
+                if (existingMovie != null)
+                {
+                    repo.Update(movie);
+                    await repo.SaveChangesAsync();
+                    return Results.Ok(movie);
+                }
+                else
+                {
+                    return Results.NotFound();
+                }
+
+            }
+            catch (Exception e)
+            {
+                return Results.Problem(e.Message);
+            }
+
+
         }
-
-
     }
 }
