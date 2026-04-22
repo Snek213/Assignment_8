@@ -15,34 +15,35 @@ POST {{Assignment_8_HostAddress}}/movies
 Content-Type: application/json
 
 {
-  "title": "The Matrix",
-  "releaseDate": "1999-03-31",
-  "genre": "Sci-Fi",
-  "price": 9.99,
-  "rating": 95,
-  "pictureUri": "https://example.com/matrix.jpg"
+  "Title": "The Matrix",
+  "ReleaseDate": "1999-03-31",
+  "Genre": "Sci-Fi",
+  "Price": 9.99,
+  "Rating": 95,
+  "PictureUri": "https://example.com/matrix.jpg"
 }
 
 
 ###
 
-DELETE {{Assignment_8_HostAddress}}/movies/7
+DELETE {{Assignment_8_HostAddress}}/movie/7
 Accept: application/json
 
 ###
 
-PUT {{Assignment_8_HostAddress}}/movies/9
+PUT {{Assignment_8_HostAddress}}/movie
 Content-Type: application/json
 
 {
-  "id": 9,
-  "title": "The Matrix Reloaded",
-  "releaseDate": "2003-05-15",
-  "genre": "Sci-Fi Action",
-  "price": 12.99,
-  "rating": 85,
-  "pictureUri": "https://example.com/matrix-reloaded.jpg"
+  "Id": 9,
+  "Title": "The Matrix Reloaded",
+  "ReleaseDate": "2003-05-15",
+  "Genre": "Sci-Fi Action",
+  "Price": 12.99,
+  "Rating": 85,
+  "PictureUri": "https://example.com/matrix-reloaded.jpg"
 }
+
 
 ### 
 

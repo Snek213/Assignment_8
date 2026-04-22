@@ -60,11 +60,14 @@ namespace Assignment_8.Data
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
-		}
+        }
 
-        public void Update(Assignment_8.Models.Movie movie)
+        public async Task Update(Assignment_8.Models.Movie movie)
         {
+
             _context.Movie.Update(movie);
+            await _context.SaveChangesAsync();
+
         }
     }
 }

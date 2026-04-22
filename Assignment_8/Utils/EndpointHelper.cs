@@ -12,9 +12,9 @@ namespace Assignment_8.Utils
 
             app.MapPost("/movies", AddMovieAsync).WithName("AddMovie");
 
-            app.MapDelete("/movies/{id}", DeleteMovieAsync).WithName("DeleteMovie");
+            app.MapDelete("/movie/{id}", DeleteMovieAsync).WithName("DeleteMovie");
 
-            app.MapPut("/movies/{id}", UpdateMovieAsync).WithName("UpdateMovie");
+            app.MapPut("/movie", UpdateMovieAsync).WithName("UpdateMovie");
 
 
         }
@@ -28,15 +28,9 @@ namespace Assignment_8.Utils
         {
             try
             {
-                Movie? movie = repo.GetById(id);
-                if (movie != null)
-                {
-                    return Results.Ok(movie);
-                }
-                else
-                {
-                    return Results.NotFound();
-                }
+                var movie = repo.GetById(id);
+                if (movie == null) return Results.NotFound();
+                return Results.Ok(movie);
             }
             catch (Exception e)
             {
@@ -59,25 +53,16 @@ namespace Assignment_8.Utils
         {
             try
             {
-                Movie? existingMovie = repo.GetById(movie.Id);
-                if (existingMovie != null)
-                {
-                    repo.Update(movie);
-                    await repo.SaveChangesAsync();
-                    return Results.Ok(movie);
-                }
-                else
-                {
-                    return Results.NotFound();
-                }
-
+                // Just try to update directly
+                await repo.Update(movie);
+                return Results.Ok(movie);
             }
             catch (Exception e)
             {
-                return Results.Problem(e.Message);
+                // This means the movie doesn't exist
+                return Results.NotFound();
             }
-
-
+            
         }
     }
 }
